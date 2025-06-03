@@ -1,7 +1,7 @@
 // Global variables
 let cityData = [];
 let currentUnit = 'celsius';
-const API_KEY = '1635890d447b1c9c35b8f972c3430f35'; // OpenWeatherMap API key
+const API_KEY = '727c67ad25c6399906cd362a2c8c87e7'; // OpenWeatherMap API key
 
 // Hardcoded city data to avoid fetch issues with local files
 const hardcodedCityData = [
