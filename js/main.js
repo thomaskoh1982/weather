@@ -173,12 +173,22 @@ async function fetchWeatherData(lat, lon, cityName) {
         const currentWeatherResponse = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
         );
+        
+        if (!currentWeatherResponse.ok) {
+            throw new Error(`HTTP error! status: ${currentWeatherResponse.status}`);
+        }
+        
         const currentWeatherData = await currentWeatherResponse.json();
         
         // Fetch 5-day forecast
         const forecastResponse = await fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
         );
+        
+        if (!forecastResponse.ok) {
+            throw new Error(`HTTP error! status: ${forecastResponse.status}`);
+        }
+        
         const forecastData = await forecastResponse.json();
         
         // Update UI with weather data
@@ -188,7 +198,7 @@ async function fetchWeatherData(lat, lon, cityName) {
         showLoading(false);
     } catch (error) {
         console.error('Error fetching weather data:', error);
-        showError('Failed to fetch weather data. Please try again.');
+        showError(`Failed to fetch weather data: ${error.message}`);
         showLoading(false);
     }
 }
